@@ -401,7 +401,7 @@ def http_check(parse_result, endpoint, expected, threshold, metrics_groups):
         request_path = "{}{}".format(parse_result.path,
                                      "?{}".format(parse_result.query) if len(parse_result.query) > 0 else "")
         logger.debug(f"request path: {request_path}")
-        conn.request("GET", request_path)
+        conn.request("GET", request_path, headers={"User-Agent": "cupcake/1.0.0"})
         http_response = conn.getresponse()
         status = str(http_response.status)
         logger.debug(f"status: {status}, expected: {expected}")
